@@ -1,0 +1,220 @@
+@import "tailwindcss";
+
+/* Orchid Agency Group design system v1. Tokens mirror the design canvas boards 02-04. */
+@theme {
+  --color-orchid-900: #4a3568;
+  --color-orchid-800: #5b3f84;
+  --color-orchid-600: #7655a2;
+  --color-orchid-400: #b28cbf;
+  --color-orchid-200: #cbb7e5;
+  --color-lavender: #ede7f6;
+
+  --color-ink-900: #161616;
+  --color-ink-800: #2e2b33;
+  --color-ink-700: #222025;
+  --color-muted: #6b6775;
+  --color-gray-400: #a4a4a4;
+  --color-line: #e2e2e2;
+  --color-surface: #f7f7f7;
+  --color-paper: #ffffff;
+
+  --color-success: #2e7d32;
+  --color-warning: #9a6b00;
+  --color-error: #b3261e;
+
+  --font-sans: var(--font-josefin-sans), Arial, sans-serif;
+  --font-slab: var(--font-josefin-slab), Rockwell, Georgia, serif;
+
+  --radius-sm: 4px;
+  --radius-md: 8px;
+
+  --shadow-1: 1px 1px 3px rgb(0 0 0 / 0.1);
+  --shadow-2: 0 8px 24px rgb(22 22 22 / 0.16);
+
+  --ease-sheet: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@layer base {
+  html {
+    scroll-padding-top: 88px;
+  }
+
+  body {
+    background: var(--color-paper);
+    color: var(--color-ink-700);
+    font-family: var(--font-sans);
+    font-size: 16px;
+    line-height: 1.6;
+  }
+
+  :where(a, button, input, textarea, select, summary):focus-visible {
+    outline: 2px solid var(--color-orchid-600);
+    outline-offset: 2px;
+  }
+
+  .on-ink :where(a, button, input, textarea):focus-visible {
+    outline-color: var(--color-orchid-200);
+  }
+}
+
+@layer components {
+  /* Type scale from board 03. Josefin's low x-height keeps body at 16px minimum. */
+  .type-display {
+    font-family: var(--font-slab);
+    font-weight: 600;
+    font-size: clamp(2.5rem, 1.6rem + 3vw, 3.5rem);
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+    text-wrap: balance;
+  }
+  .type-h1 {
+    font-family: var(--font-slab);
+    font-weight: 600;
+    font-size: clamp(2.25rem, 1.7rem + 2vw, 2.75rem);
+    line-height: 1.1;
+    text-wrap: balance;
+  }
+  .type-h2 {
+    font-family: var(--font-slab);
+    font-weight: 600;
+    font-size: clamp(1.75rem, 1.5rem + 1vw, 2rem);
+    line-height: 1.15;
+    text-wrap: balance;
+  }
+  .type-h3 {
+    font-family: var(--font-slab);
+    font-weight: 600;
+    font-size: 1.5rem;
+    line-height: 1.25;
+  }
+  .type-eyebrow {
+    font-size: 13px;
+    line-height: 1;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+  .type-nav {
+    font-size: 14px;
+    line-height: 1;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    height: 48px;
+    padding: 0 24px;
+    border-radius: var(--radius-sm);
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1;
+    white-space: nowrap;
+    transition: background-color 150ms ease, color 150ms ease, border-color 150ms ease;
+  }
+  .btn-primary {
+    background: var(--color-orchid-600);
+    color: var(--color-paper);
+  }
+  .btn-primary:hover,
+  .btn-primary:active {
+    background: var(--color-orchid-800);
+  }
+  .btn-secondary {
+    border: 2px solid var(--color-orchid-600);
+    background: var(--color-paper);
+    color: var(--color-orchid-600);
+  }
+  .btn-secondary:hover {
+    border-color: var(--color-orchid-800);
+    color: var(--color-orchid-800);
+    background: var(--color-lavender);
+  }
+  .btn-on-ink {
+    background: var(--color-paper);
+    color: var(--color-ink-900);
+  }
+  .btn-on-ink:hover {
+    background: var(--color-orchid-200);
+  }
+  .btn:disabled {
+    background: var(--color-line);
+    color: var(--color-muted);
+    cursor: not-allowed;
+  }
+
+  .text-link {
+    font-weight: 600;
+    color: var(--color-orchid-800);
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    text-decoration-thickness: 1px;
+    transition: color 150ms ease, text-decoration-thickness 150ms ease;
+  }
+  .text-link:hover {
+    color: var(--color-orchid-900);
+    text-decoration-thickness: 2px;
+  }
+
+  .field {
+    height: 48px;
+    width: 100%;
+    padding: 0 14px;
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-sm);
+    background: var(--color-surface);
+    color: var(--color-ink-700);
+    font-size: 16px;
+    transition: border-color 150ms ease, background-color 150ms ease;
+  }
+  .field::placeholder {
+    color: var(--color-muted);
+  }
+  .field:focus {
+    background: var(--color-paper);
+    border: 2px solid var(--color-orchid-600);
+    padding: 0 13px;
+  }
+  .field[aria-invalid="true"] {
+    background: var(--color-paper);
+    border: 2px solid var(--color-error);
+    padding: 0 13px;
+  }
+  textarea.field {
+    height: auto;
+    min-height: 120px;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    resize: vertical;
+  }
+  textarea.field:focus,
+  textarea.field[aria-invalid="true"] {
+    padding-top: 11px;
+    padding-bottom: 11px;
+  }
+
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    height: 32px;
+    padding: 0 12px;
+    border-radius: 999px;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
