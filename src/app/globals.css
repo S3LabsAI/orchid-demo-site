@@ -1,7 +1,12 @@
 @import "tailwindcss";
 
-/* Orchid Agency Group design system v1. Tokens mirror the design canvas boards 02-04. */
+/*
+  Orchid palette (design canvas board 02) on the Fernbrook template structure.
+  Template mapping: forest green -> Orchid 900, rust accent -> Orchid 600,
+  cream ground -> paper, sage tints -> lavender and surface, near-black bands -> ink.
+*/
 @theme {
+  --color-orchid-950: #3a2952;
   --color-orchid-900: #4a3568;
   --color-orchid-800: #5b3f84;
   --color-orchid-600: #7655a2;
@@ -19,11 +24,11 @@
   --color-paper: #ffffff;
 
   --color-success: #2e7d32;
-  --color-warning: #9a6b00;
   --color-error: #b3261e;
 
-  --font-sans: var(--font-josefin-sans), Arial, sans-serif;
-  --font-slab: var(--font-josefin-slab), Rockwell, Georgia, serif;
+  --font-sans: var(--font-karla), Arial, sans-serif;
+  --font-serif: var(--font-newsreader), Georgia, serif;
+  --font-mono: var(--font-plex-mono), ui-monospace, monospace;
 
   --radius-sm: 4px;
   --radius-md: 8px;
@@ -36,7 +41,7 @@
 
 @layer base {
   html {
-    scroll-padding-top: 88px;
+    scroll-padding-top: 96px;
   }
 
   body {
@@ -44,7 +49,7 @@
     color: var(--color-ink-700);
     font-family: var(--font-sans);
     font-size: 16px;
-    line-height: 1.6;
+    line-height: 1.65;
   }
 
   :where(a, button, input, textarea, select, summary):focus-visible {
@@ -52,53 +57,52 @@
     outline-offset: 2px;
   }
 
-  .on-ink :where(a, button, input, textarea):focus-visible {
+  .on-dark :where(a, button, input, textarea):focus-visible {
     outline-color: var(--color-orchid-200);
   }
 }
 
 @layer components {
-  /* Type scale from board 03. Josefin's low x-height keeps body at 16px minimum. */
-  .type-display {
-    font-family: var(--font-slab);
-    font-weight: 600;
-    font-size: clamp(2.5rem, 1.6rem + 3vw, 3.5rem);
-    line-height: 1.05;
-    letter-spacing: -0.01em;
+  /* Editorial serif headlines, as in the template. Italic spans carry the accent. */
+  .h-display {
+    font-family: var(--font-serif);
+    font-weight: 500;
+    font-size: clamp(3rem, 1.9rem + 4.2vw, 5.5rem);
+    line-height: 0.96;
+    letter-spacing: -0.025em;
     text-wrap: balance;
   }
-  .type-h1 {
-    font-family: var(--font-slab);
-    font-weight: 600;
-    font-size: clamp(2.25rem, 1.7rem + 2vw, 2.75rem);
-    line-height: 1.1;
+  .h-section {
+    font-family: var(--font-serif);
+    font-weight: 500;
+    font-size: clamp(2.25rem, 1.6rem + 2.4vw, 3.5rem);
+    line-height: 1.02;
+    letter-spacing: -0.02em;
     text-wrap: balance;
   }
-  .type-h2 {
-    font-family: var(--font-slab);
-    font-weight: 600;
-    font-size: clamp(1.75rem, 1.5rem + 1vw, 2rem);
-    line-height: 1.15;
-    text-wrap: balance;
-  }
-  .type-h3 {
-    font-family: var(--font-slab);
-    font-weight: 600;
+  .h-card {
+    font-family: var(--font-serif);
+    font-weight: 500;
     font-size: 1.5rem;
-    line-height: 1.25;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
   }
-  .type-eyebrow {
-    font-size: 13px;
-    line-height: 1;
-    font-weight: 700;
-    letter-spacing: 2px;
-    text-transform: uppercase;
+  .h-statement {
+    font-family: var(--font-serif);
+    font-weight: 400;
+    font-size: clamp(1.625rem, 1.2rem + 1.6vw, 2.5rem);
+    line-height: 1.22;
+    letter-spacing: -0.01em;
+    text-wrap: pretty;
   }
-  .type-nav {
-    font-size: 14px;
-    line-height: 1;
-    font-weight: 700;
-    letter-spacing: 1px;
+
+  /* Mono labels: the template's small-caps metadata voice. */
+  .label {
+    font-family: var(--font-mono);
+    font-size: 11.5px;
+    line-height: 1.4;
+    font-weight: 500;
+    letter-spacing: 0.16em;
     text-transform: uppercase;
   }
 
@@ -108,9 +112,9 @@
     justify-content: center;
     gap: 8px;
     height: 48px;
-    padding: 0 24px;
-    border-radius: var(--radius-sm);
-    font-size: 16px;
+    padding: 0 22px;
+    border-radius: 2px;
+    font-size: 15px;
     font-weight: 600;
     line-height: 1;
     white-space: nowrap;
@@ -120,44 +124,58 @@
     background: var(--color-orchid-600);
     color: var(--color-paper);
   }
-  .btn-primary:hover,
-  .btn-primary:active {
+  .btn-primary:hover {
     background: var(--color-orchid-800);
   }
-  .btn-secondary {
-    border: 2px solid var(--color-orchid-600);
+  .btn-outline {
+    border: 1px solid var(--color-ink-700);
     background: var(--color-paper);
-    color: var(--color-orchid-600);
+    color: var(--color-ink-700);
   }
-  .btn-secondary:hover {
-    border-color: var(--color-orchid-800);
+  .btn-outline:hover {
+    border-color: var(--color-orchid-600);
     color: var(--color-orchid-800);
-    background: var(--color-lavender);
   }
-  .btn-on-ink {
+  .btn-light {
     background: var(--color-paper);
     color: var(--color-ink-900);
   }
-  .btn-on-ink:hover {
+  .btn-light:hover {
     background: var(--color-orchid-200);
   }
   .btn:disabled {
     background: var(--color-line);
     color: var(--color-muted);
+    border-color: var(--color-line);
     cursor: not-allowed;
   }
 
-  .text-link {
-    font-weight: 600;
-    color: var(--color-orchid-800);
-    text-decoration: underline;
-    text-underline-offset: 4px;
-    text-decoration-thickness: 1px;
-    transition: color 150ms ease, text-decoration-thickness 150ms ease;
+  .link-mono {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-orchid-600);
+    transition: color 150ms ease, gap 150ms ease;
   }
-  .text-link:hover {
+  .link-mono:hover {
     color: var(--color-orchid-900);
-    text-decoration-thickness: 2px;
+    gap: 10px;
+  }
+
+  .link-underline {
+    font-weight: 600;
+    color: var(--color-ink-700);
+    border-bottom: 1px solid var(--color-orchid-600);
+    padding-bottom: 2px;
+    transition: color 150ms ease;
+  }
+  .link-underline:hover {
+    color: var(--color-orchid-600);
   }
 
   .field {
@@ -165,22 +183,23 @@
     width: 100%;
     padding: 0 14px;
     border: 1px solid var(--color-line);
-    border-radius: var(--radius-sm);
-    background: var(--color-surface);
+    border-radius: 2px;
+    background: var(--color-paper);
     color: var(--color-ink-700);
     font-size: 16px;
-    transition: border-color 150ms ease, background-color 150ms ease;
+    transition: border-color 150ms ease;
   }
   .field::placeholder {
     color: var(--color-muted);
   }
+  .field:hover {
+    border-color: var(--color-gray-400);
+  }
   .field:focus {
-    background: var(--color-paper);
     border: 2px solid var(--color-orchid-600);
     padding: 0 13px;
   }
   .field[aria-invalid="true"] {
-    background: var(--color-paper);
     border: 2px solid var(--color-error);
     padding: 0 13px;
   }
@@ -197,15 +216,29 @@
     padding-bottom: 11px;
   }
 
-  .chip {
+  .tag {
     display: inline-flex;
     align-items: center;
-    height: 32px;
-    padding: 0 12px;
-    border-radius: 999px;
-    font-size: 13px;
-    font-weight: 700;
-    letter-spacing: 0.5px;
+    height: 30px;
+    padding: 0 10px;
+    border: 1px solid var(--color-orchid-200);
+    background: var(--color-lavender);
+    color: var(--color-orchid-900);
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 500;
+  }
+
+  .container-page {
+    margin-inline: auto;
+    width: 100%;
+    max-width: 1232px;
+    padding-inline: 16px;
+  }
+  @media (min-width: 640px) {
+    .container-page {
+      padding-inline: 32px;
+    }
   }
 }
 

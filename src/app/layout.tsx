@@ -1,19 +1,25 @@
 import type { Metadata } from "next";
-import { Josefin_Sans, Josefin_Slab } from "next/font/google";
+import { IBM_Plex_Mono, Karla, Newsreader } from "next/font/google";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import "./globals.css";
 
-const josefinSans = Josefin_Sans({
-  variable: "--font-josefin-sans",
+const newsreader = Newsreader({
+  variable: "--font-newsreader",
   subsets: ["latin"],
-  weight: ["400", "600", "700"],
+  style: ["normal", "italic"],
+  axes: ["opsz"],
 });
 
-const josefinSlab = Josefin_Slab({
-  variable: "--font-josefin-slab",
+const karla = Karla({
+  variable: "--font-karla",
   subsets: ["latin"],
-  weight: ["600", "700"],
+});
+
+const plexMono = IBM_Plex_Mono({
+  variable: "--font-plex-mono",
+  subsets: ["latin"],
+  weight: ["400", "500"],
 });
 
 export const metadata: Metadata = {
@@ -28,11 +34,11 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" className={`${josefinSans.variable} ${josefinSlab.variable} antialiased`}>
+    <html lang="en" className={`${newsreader.variable} ${karla.variable} ${plexMono.variable} antialiased`}>
       <body className="flex min-h-[100dvh] flex-col">
         <a
           href="#main"
-          className="sr-only z-50 rounded-sm bg-paper px-4 py-3 font-semibold text-orchid-800 focus:not-sr-only focus:fixed focus:top-3 focus:left-3"
+          className="sr-only z-50 bg-paper px-4 py-3 font-semibold text-orchid-800 focus:not-sr-only focus:fixed focus:top-3 focus:left-3"
         >
           Skip to content
         </a>

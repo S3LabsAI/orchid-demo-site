@@ -17,8 +17,8 @@ type Tone = "light" | "ink";
 /** Reads ?interest= so coverage cards can preselect a line. Wrap in <Suspense>. */
 export function ContactFormFromQuery(props: { variant?: "full" | "compact"; tone?: Tone }) {
   const params = useSearchParams();
-  const interest = params.get("interest");
-  return <ContactForm {...props} initialInterests={interest ? [interest] : []} />;
+  const interests = (params.get("interest") ?? "").split(",").filter(Boolean);
+  return <ContactForm {...props} initialInterests={interests} />;
 }
 
 export function ContactForm({
@@ -72,13 +72,13 @@ export function ContactForm({
     return (
       <div
         role="status"
-        className={`flex flex-col gap-4 rounded-sm p-8 ${ink ? "bg-ink-800 text-paper" : "bg-lavender text-ink-700"}`}
+        className={`flex flex-col gap-4 p-8 ${ink ? "bg-ink-800 text-paper" : "bg-lavender text-ink-700"}`}
       >
         <CheckCircle size={36} weight="fill" className={ink ? "text-orchid-200" : "text-orchid-600"} aria-hidden />
-        <h3 className="type-h3">{sentName ? `Thanks, ${sentName}.` : "Thanks for reaching out."}</h3>
+        <h3 className="font-serif text-3xl font-medium">{sentName ? `Thanks, ${sentName}.` : "Thanks for reaching out."}</h3>
         <p className={ink ? "text-line" : "text-ink-700"}>
           We will be in touch during office hours, Monday to Friday, 9 AM to 5 PM Central. Need us sooner? Call{" "}
-          <a href={contact.phoneHref} className={ink ? "font-semibold text-orchid-200 underline" : "text-link"}>
+          <a href={contact.phoneHref} className={ink ? "font-semibold text-orchid-200 underline" : "link-underline"}>
             {contact.phone}
           </a>
           .
@@ -86,7 +86,7 @@ export function ContactForm({
         <p className={help}>Demo site: this form is not connected, so no message was sent.</p>
         <button
           type="button"
-          className={`btn w-fit ${ink ? "btn-on-ink" : "btn-secondary"}`}
+          className={`btn w-fit ${ink ? "btn-light" : "btn-outline"}`}
           onClick={() => {
             setStatus("idle");
             setInterests([]);
@@ -101,7 +101,7 @@ export function ContactForm({
   return (
     <form noValidate onSubmit={onSubmit} className="flex flex-col gap-5" aria-describedby={errors.form ? id("form-error") : undefined}>
       {errors.form && (
-        <p id={id("form-error")} role="alert" className={`flex items-start gap-2 rounded-sm p-3 ${ink ? "bg-ink-800" : "bg-[#FCEDEC]"} ${errorText}`}>
+        <p id={id("form-error")} role="alert" className={`flex items-start gap-2 p-3 ${ink ? "bg-ink-800" : "bg-[#FCEDEC]"} ${errorText}`}>
           <WarningCircle size={18} weight="bold" className="mt-px shrink-0" aria-hidden />
           {errors.form}
         </p>
@@ -157,7 +157,7 @@ export function ContactForm({
                 return (
                   <label
                     key={opt.id}
-                    className={`relative inline-flex min-h-11 cursor-pointer items-center gap-2 rounded-full border px-4 text-sm font-semibold transition-colors duration-150 has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-orchid-600 ${
+                    className={`relative inline-flex min-h-11 cursor-pointer items-center gap-2 border px-4 text-sm font-semibold transition-colors duration-150 has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-orchid-600 ${
                       checked
                         ? "border-orchid-600 bg-orchid-600 text-paper"
                         : "border-line bg-paper text-ink-700 hover:border-orchid-600 hover:bg-lavender"
@@ -227,9 +227,9 @@ export function ContactForm({
       <button
         type="submit"
         disabled={status === "sending"}
-        className={`btn w-full sm:w-fit ${ink ? "btn-on-ink" : "btn-primary"}`}
+        className={`btn w-full sm:w-fit ${ink ? "btn-light" : "btn-primary"}`}
       >
-        {status === "sending" ? "Sending" : "Schedule a free consultation"}
+        {status === "sending" ? "Sending" : "Send my request"}
       </button>
     </form>
   );

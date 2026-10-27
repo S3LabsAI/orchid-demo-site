@@ -24,12 +24,14 @@ export type CoverageId = "commercial" | "personal" | "trucking";
 export const coverage: {
   id: CoverageId;
   title: string;
+  short: string;
   intro: string;
   items: string[];
 }[] = [
   {
     id: "commercial",
     title: "Commercial lines",
+    short: "Business owner's policies, liability, property, auto, and workers' comp.",
     intro: "Comprehensive protection for business owners across industries.",
     items: [
       "Business Owner's Policies (BOP)",
@@ -46,6 +48,7 @@ export const coverage: {
   {
     id: "personal",
     title: "Personal lines",
+    short: "Auto, home and dwelling, umbrella, and the boat or RV in the driveway.",
     intro: "Personal coverage designed for security and peace of mind.",
     items: [
       "Auto insurance",
@@ -59,6 +62,7 @@ export const coverage: {
   {
     id: "trucking",
     title: "Trucking and transportation",
+    short: "Our specialty. Owner-operators, fleets, and transportation businesses.",
     intro: "Tailored coverage for owner-operators, fleets, and transportation businesses.",
     items: [
       "Commercial auto liability",
@@ -71,19 +75,29 @@ export const coverage: {
   },
 ];
 
-export const process = [
+export const whyPoints = [
   {
-    title: "We analyze your risks",
-    body: "Tell us what you need to protect: your home, your vehicles, your business, or your fleet.",
+    icon: "scales",
+    title: "We shop, you choose",
+    body: "No more chasing quotes. We compare 20+ top-rated carriers side by side and bring back the options that fit your risks.",
   },
   {
-    title: "We identify coverage gaps",
-    body: "We look at what you carry today and find what is missing before an unexpected event does.",
+    icon: "magnifier",
+    title: "We find the gaps",
+    body: "We analyze your risks and identify coverage gaps, so protection keeps you secure today and prepared for tomorrow.",
   },
   {
-    title: "We shop 20+ carriers",
-    body: "No more chasing quotes. We compare top-rated carriers and bring back options that fit your risks and budget.",
+    icon: "truck",
+    title: "Trucking specialists",
+    body: "Owner-operators, fleets, and transportation businesses get coverage built for the road, from cargo to trailer interchange.",
   },
+] as const;
+
+export const stats = [
+  { value: "20+", label: "Carriers compared" },
+  { value: "14", label: "States licensed" },
+  { value: "3", label: "Lines of coverage" },
+  { value: "9 to 5", label: "Central, Mon to Fri" },
 ];
 
 const cdn = "https://img1.wsimg.com/isteam/ip/92171dbe-d379-4423-8fb4-1a33374b31b8";
@@ -134,6 +148,9 @@ export const team = [
     phoneHref: "tel:+15159494100",
     email: "Phi@OrchidAG.com",
     photo: `${cdn}/blob-79ea9cb.png/:/rs=w:640,h:640,cg:true`,
+    // Source is a circular crop on white; zoom past the circle edge when framed square.
+    portrait: null,
+    circular: true,
     alt: "Phi Dang, smiling, in a blue suit",
   },
   {
@@ -145,9 +162,18 @@ export const team = [
     phoneHref: "tel:+15158099320",
     email: "info@OrchidAG.com",
     photo: `${cdn}/ChatGPT%20Image%20Feb%2019%2C%202026%2C%2002_19_36%20PM.png/:/cr=t:2.75%25,l:0%25,w:100%25,h:66.67%25/rs=w:640,h:640,cg:true`,
+    portrait: `${cdn}/ChatGPT%20Image%20Feb%2019%2C%202026%2C%2002_19_36%20PM.png/:/rs=w:800,cg:true,m`,
+    circular: false,
     alt: "Lan Nguyen, smiling, with dark hair in a black top",
   },
 ];
+
+export const heroPhotos = {
+  main: `${cdn}/DNAillustratedphotography-dangfamily(11of13).jpg/:/rs=w:1200,cg:true,m`,
+  mainAlt: "Phi Dang and Lan Nguyen with their son on an autumn trail",
+  detail: `${cdn}/18-DH106219.jpg/:/rs=w:600,cg:true,m`,
+  detailAlt: "A toddler walking on a garden path, holding his parents' hands",
+};
 
 export const familyPhotos = [
   "DNAillustratedphotography-dangfamily(11of13).jpg",
@@ -162,7 +188,8 @@ export const familyPhotos = [
 }));
 
 export const nav = [
-  { href: "/", label: "Home" },
+  { href: "/#why", label: "Why Orchid" },
   { href: "/meet-the-team-1", label: "Meet the team" },
+  { href: "/#partners", label: "Partners" },
   { href: "/contact", label: "Contact" },
 ] as const;

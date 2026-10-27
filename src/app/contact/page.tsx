@@ -3,7 +3,7 @@ import { Suspense } from "react";
 import { EnvelopeSimple, Phone } from "@phosphor-icons/react/dist/ssr";
 import { ContactForm, ContactFormFromQuery } from "@/components/contact-form";
 import { OpenStatus } from "@/components/open-status";
-import { contact, hours, states } from "@/lib/site";
+import { contact, states } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Insurance brokerage contact",
@@ -12,60 +12,72 @@ export const metadata: Metadata = {
 
 export default function ContactPage() {
   return (
-    <section className="mx-auto grid max-w-[1328px] gap-12 px-4 pt-12 pb-16 sm:px-8 md:pt-[72px] md:pb-24 lg:grid-cols-[minmax(0,7fr)_minmax(0,5fr)] lg:gap-16 lg:px-16">
-      <div className="flex flex-col gap-8">
-        <div className="flex flex-col gap-4">
-          <h1 className="type-h1">Contact us</h1>
-          <p className="max-w-xl text-lg text-muted">
-            Have questions about your coverage options? Complete the form and we&apos;ll help you find the right
-            protection.
-          </p>
-        </div>
+    <>
+      <section className="container-page flex flex-col gap-6 pt-14 pb-12 md:pt-20">
+        <p className="label text-orchid-600">Request a quote</p>
+        <h1 className="h-display max-w-4xl">
+          Drop us <em className="font-normal text-orchid-600 italic">a line.</em>
+        </h1>
+        <p className="max-w-xl text-lg text-muted">
+          Have questions about your coverage options? Complete the form and we&apos;ll help you find the right
+          protection.
+        </p>
+      </section>
+
+      <section
+        aria-label="Contact form and details"
+        className="container-page grid gap-14 pt-4 pb-20 md:pb-28 lg:grid-cols-[minmax(0,1fr)_400px] lg:gap-20"
+      >
         <Suspense fallback={<ContactForm />}>
           <ContactFormFromQuery />
         </Suspense>
-      </div>
 
-      <aside aria-label="Contact details" className="flex flex-col gap-8 self-start rounded-sm bg-lavender p-6 sm:p-8 lg:sticky lg:top-24">
-        <div className="flex flex-col gap-3">
-          <h2 className="text-lg font-bold text-orchid-900">Reach us directly</h2>
-          <a href={contact.phoneHref} className="inline-flex w-fit items-center gap-3 font-slab text-3xl font-semibold text-orchid-900 hover:text-orchid-600">
-            <Phone size={26} aria-hidden />
-            {contact.phone}
-          </a>
-          <a href={contact.emailHref} className="text-link inline-flex w-fit items-center gap-2">
-            <EnvelopeSimple size={18} aria-hidden />
-            {contact.email}
-          </a>
-        </div>
-
-        <div className="flex flex-col gap-3 border-t border-orchid-200 pt-6">
-          <h2 className="text-lg font-bold text-orchid-900">Hours</h2>
-          <OpenStatus />
-          <dl className="text-sm">
-            <div className="flex justify-between gap-4 border-b border-orchid-200 py-2">
-              <dt className="font-semibold">Monday to Friday</dt>
-              <dd>9 AM to 5 PM Central</dd>
+        <aside aria-label="Contact details" className="relative mr-3 mb-3 self-start lg:sticky lg:top-28">
+          <div aria-hidden className="absolute inset-0 translate-x-3 translate-y-3 bg-orchid-600" />
+          <div className="relative flex flex-col gap-7 border border-line bg-paper p-7 sm:p-8">
+            <div className="flex flex-col gap-3">
+              <p className="label text-muted">Reach us directly</p>
+              <a
+                href={contact.phoneHref}
+                className="inline-flex w-fit items-center gap-3 font-serif text-3xl font-medium hover:text-orchid-600"
+              >
+                <Phone size={24} aria-hidden />
+                {contact.phone}
+              </a>
+              <a href={contact.emailHref} className="link-underline inline-flex w-fit items-center gap-2 text-[15px]">
+                <EnvelopeSimple size={16} aria-hidden />
+                {contact.email}
+              </a>
             </div>
-            <div className="flex justify-between gap-4 py-2">
-              <dt className="font-semibold">Weekends</dt>
-              <dd className="text-right">Closed, by mobile and email</dd>
-            </div>
-          </dl>
-          <p className="sr-only">{hours.weekends}</p>
-        </div>
 
-        <div className="flex flex-col gap-3 border-t border-orchid-200 pt-6">
-          <h2 className="text-lg font-bold text-orchid-900">States we serve</h2>
-          <ul className="flex flex-wrap gap-2">
-            {states.map((s) => (
-              <li key={s} className="chip bg-paper text-orchid-900">
-                {s}
-              </li>
-            ))}
-          </ul>
-        </div>
-      </aside>
-    </section>
+            <div className="flex flex-col gap-3 border-t border-line pt-6">
+              <p className="label text-muted">Hours</p>
+              <OpenStatus />
+              <dl className="font-mono text-[13px]">
+                <div className="flex justify-between gap-4 border-b border-line py-2">
+                  <dt>Mon to Fri</dt>
+                  <dd>9:00 to 17:00 Central</dd>
+                </div>
+                <div className="flex justify-between gap-4 py-2">
+                  <dt>Weekends</dt>
+                  <dd className="text-right">Closed, by mobile and email</dd>
+                </div>
+              </dl>
+            </div>
+
+            <div className="flex flex-col gap-3 border-t border-line pt-6">
+              <p className="label text-muted">Licensed in 14 states</p>
+              <ul className="flex flex-wrap gap-1.5">
+                {states.map((s) => (
+                  <li key={s} className="tag h-7 px-2">
+                    {s}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </aside>
+      </section>
+    </>
   );
 }

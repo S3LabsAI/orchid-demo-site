@@ -1,7 +1,11 @@
 # Orchid Agency Group: redesign demo
 
-Interactive demo of the orchidag.com redesign, built from the Orchid design system canvas
+Interactive demo of the orchidag.com redesign. Layout follows the InsurePages Fernbrook template
+(https://www.insurepages.com/demos/fernbrook/); colors come from the Orchid design system canvas
 (https://claude.ai/code/artifact/6b9e4cc5-65ee-4459-8c90-758668eae226).
+
+Fernbrook's testimonials and sample prices were left out because Orchid has no real ones yet;
+the carrier partners section sits in the testimonials slot.
 
 ```bash
 npm install
