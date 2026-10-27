@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import { EnvelopeSimple, Phone } from "@phosphor-icons/react/dist/ssr";
+import { Headshot } from "@/components/headshot";
 import { PhotoGallery } from "@/components/photo-gallery";
 import { QuoteCta } from "@/components/quote-cta";
 import { familyPhotos, team } from "@/lib/site";
@@ -31,15 +31,7 @@ export default function TeamPage() {
               key={person.name}
               className={`flex flex-col gap-6 border-b border-line py-10 md:border-b-0 ${i === 0 ? "md:pr-10" : "md:pl-10"}`}
             >
-              <div className="relative aspect-square max-w-md overflow-hidden bg-lavender">
-                <Image
-                  src={person.portrait ?? person.photo}
-                  alt={person.alt}
-                  fill
-                  sizes="(min-width: 768px) 448px, 100vw"
-                  className={`object-cover ${person.circular ? "scale-150 object-center" : "object-[50%_15%]"}`}
-                />
-              </div>
+              <Headshot person={person} sizes="(min-width: 768px) 672px, 150vw" className="max-w-md" />
               <div className="flex items-baseline justify-between gap-4">
                 <h2 className="font-serif text-4xl font-medium tracking-[-0.01em]">{person.name}</h2>
                 <span className="label text-muted">Since {person.since}</span>

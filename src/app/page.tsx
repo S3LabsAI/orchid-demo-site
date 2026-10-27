@@ -10,6 +10,7 @@ import {
 } from "@phosphor-icons/react/dist/ssr";
 import { CarrierWall } from "@/components/carrier-wall";
 import { CoverageExplorer } from "@/components/coverage-explorer";
+import { Headshot } from "@/components/headshot";
 import { QuoteCta } from "@/components/quote-cta";
 import { contact, coverage, heroPhotos, states, stats, team, whyPoints, type CoverageId } from "@/lib/site";
 
@@ -69,9 +70,7 @@ function Hero() {
         <div className="flex items-center gap-4 border-t border-line pt-6">
           <div className="flex -space-x-3">
             {[phi, lan].map((p) => (
-              <span key={p.name} className="relative size-11 overflow-hidden rounded-full border-2 border-paper bg-lavender">
-                <Image src={p.photo} alt="" fill sizes="44px" className={`object-cover ${p.circular ? "scale-150 object-center" : "object-top"}`} />
-              </span>
+              <Headshot key={p.name} person={p} sizes="66px" decorative className="size-11 rounded-full border-2 border-paper" />
             ))}
           </div>
           <p className="text-[14px] leading-snug text-muted">
@@ -198,9 +197,7 @@ function People() {
         </figure>
         <div className="flex flex-col gap-4">
           <figure className="flex flex-col gap-2">
-            <div className="relative aspect-square overflow-hidden bg-paper">
-              <Image src={phi.photo} alt={phi.alt} fill sizes="(min-width: 1024px) 240px, 40vw" className="scale-150 object-cover object-center" />
-            </div>
+            <Headshot person={phi} sizes="(min-width: 1024px) 360px, 60vw" />
             <figcaption className="label text-muted">{phi.name} · Sales producer</figcaption>
           </figure>
           <div className="bg-lavender p-5">
