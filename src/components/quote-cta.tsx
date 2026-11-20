@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { ArrowRight } from "@phosphor-icons/react/dist/ssr";
 import { OpenStatus } from "@/components/open-status";
-import { contact, hours } from "@/lib/site";
+import { contact, demo, hours } from "@/lib/site";
 
 const promises = ["Independent · 20+ carriers", "Personal, commercial and trucking", "Licensed in 14 states"];
 
@@ -31,7 +31,7 @@ export function QuoteCta() {
               </p>
               <OpenStatus />
             </div>
-            <Link href="/contact" className="btn btn-primary w-full">
+            <Link href={demo("/contact")} className="btn btn-primary w-full">
               Start online <ArrowRight size={16} weight="bold" aria-hidden />
             </Link>
             <a href={contact.phoneHref} className="btn btn-outline w-full">

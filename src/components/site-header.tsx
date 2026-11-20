@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { ArrowRight, CaretDown, List, X } from "@phosphor-icons/react";
 import { BrandMark } from "@/components/brand-mark";
-import { contact, coverage, nav } from "@/lib/site";
+import { contact, coverage, demo, nav } from "@/lib/site";
 
 const facts = ["Independent brokerage", "20+ carriers compared", "Licensed in 14 states"];
 
@@ -52,7 +52,7 @@ export function SiteHeader() {
 
       <header className="sticky top-0 z-40 border-b border-line bg-paper/95 backdrop-blur-md">
         <div className="container-page flex h-20 items-center gap-6">
-          <Link href="/" aria-label="Orchid Agency Group, home" className="shrink-0">
+          <Link href={demo()} aria-label="Orchid Agency Group, home" className="shrink-0">
             <BrandMark />
           </Link>
 
@@ -78,7 +78,7 @@ export function SiteHeader() {
           >
             {contact.phone}
           </a>
-          <Link href="/contact" className="btn btn-primary hidden h-11 sm:inline-flex lg:ml-0">
+          <Link href={demo("/contact")} className="btn btn-primary hidden h-11 sm:inline-flex lg:ml-0">
             Get a quote <ArrowRight size={16} weight="bold" aria-hidden />
           </Link>
 
@@ -113,14 +113,15 @@ export function SiteHeader() {
             <p className="label pt-4 pb-2 text-muted">Coverage</p>
             <nav aria-label="Mobile" className="flex flex-col">
               {coverage.map((line) => (
-                <Link
+                // Plain anchors: a same-page hash change must fire `hashchange` so the explorer opens the row.
+                <a
                   key={line.id}
-                  href={`/#line-${line.id}`}
+                  href={demo(`#line-${line.id}`)}
                   onClick={() => setOpenOn(null)}
                   className="flex min-h-12 items-center border-b border-line font-serif text-xl"
                 >
                   {line.title}
-                </Link>
+                </a>
               ))}
               <p className="label pt-6 pb-2 text-muted">Agency</p>
               {nav.map((item) => (
@@ -136,7 +137,7 @@ export function SiteHeader() {
               ))}
             </nav>
             <div className="mt-6 grid gap-3 sm:grid-cols-2">
-              <Link href="/contact" className="btn btn-primary">
+              <Link href={demo("/contact")} className="btn btn-primary">
                 Get a quote <ArrowRight size={16} weight="bold" aria-hidden />
               </Link>
               <a href={contact.phoneHref} className="btn btn-outline">
@@ -184,9 +185,9 @@ function CoverageMenu() {
       {open && (
         <div id="coverage-menu" className="absolute top-full left-1/2 mt-5 w-80 -translate-x-1/2 border border-line bg-paper p-2 shadow-2">
           {coverage.map((line, i) => (
-            <Link
+            <a
               key={line.id}
-              href={`/#line-${line.id}`}
+              href={demo(`#line-${line.id}`)}
               onClick={() => setOpen(false)}
               className="flex gap-3 p-3 transition-colors duration-150 hover:bg-lavender"
             >
@@ -195,7 +196,7 @@ function CoverageMenu() {
                 <span className="block font-serif text-lg leading-tight">{line.title}</span>
                 <span className="block text-[13px] leading-snug text-muted">{line.short}</span>
               </span>
-            </Link>
+            </a>
           ))}
         </div>
       )}

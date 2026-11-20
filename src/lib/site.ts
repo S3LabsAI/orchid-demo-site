@@ -187,9 +187,13 @@ export const familyPhotos = [
   alt: `Orchid team family photo ${i + 1} of 6`,
 }));
 
+/** The demo site lives under /demo; the project overview owns the root. */
+export const DEMO = "/demo";
+export const demo = (path: `/${string}` | `#${string}` | "" = "") => `${DEMO}${path}`;
+
 export const nav = [
-  { href: "/#why", label: "Why Orchid" },
-  { href: "/meet-the-team-1", label: "Meet the team" },
-  { href: "/#partners", label: "Partners" },
-  { href: "/contact", label: "Contact" },
-] as const;
+  { href: demo("#why"), label: "Why Orchid" },
+  { href: demo("/meet-the-team-1"), label: "Meet the team" },
+  { href: demo("#partners"), label: "Partners" },
+  { href: demo("/contact"), label: "Contact" },
+];

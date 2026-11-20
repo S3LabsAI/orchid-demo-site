@@ -1,7 +1,5 @@
 import type { Metadata } from "next";
 import { IBM_Plex_Mono, Karla, Newsreader } from "next/font/google";
-import { SiteHeader } from "@/components/site-header";
-import { SiteFooter } from "@/components/site-footer";
 import "./globals.css";
 
 const newsreader = Newsreader({
@@ -24,30 +22,18 @@ const plexMono = IBM_Plex_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: "Orchid Agency Group Inc. | Insurance brokerage",
-    template: "%s | Orchid Agency Group Inc.",
+    default: "Orchid Agency Group | Website redesign project",
+    template: "%s | Orchid Agency Group",
   },
   description:
-    "Independent insurance brokerage for personal, commercial, and trucking coverage. We shop 20+ top-rated carriers across 14 states.",
+    "Project overview for the Orchid Agency Group website redesign: the interactive demo site and the Orchid design system.",
   icons: { icon: "/orchid-mark.png" },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="en" className={`${newsreader.variable} ${karla.variable} ${plexMono.variable} antialiased`}>
-      <body className="flex min-h-[100dvh] flex-col">
-        <a
-          href="#main"
-          className="sr-only z-50 bg-paper px-4 py-3 font-semibold text-orchid-800 focus:not-sr-only focus:fixed focus:top-3 focus:left-3"
-        >
-          Skip to content
-        </a>
-        <SiteHeader />
-        <main id="main" className="flex-1">
-          {children}
-        </main>
-        <SiteFooter />
-      </body>
+      <body className="flex min-h-[100dvh] flex-col">{children}</body>
     </html>
   );
 }

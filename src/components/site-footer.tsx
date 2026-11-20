@@ -1,19 +1,19 @@
 import Link from "next/link";
 import { BrandMark } from "@/components/brand-mark";
-import { contact, coverage } from "@/lib/site";
+import { contact, coverage, demo } from "@/lib/site";
 
 const columns = [
   {
     title: "Insurance",
-    links: coverage.map((c) => ({ href: `/#line-${c.id}`, label: c.title })),
+    links: coverage.map((c) => ({ href: demo(`#line-${c.id}`), label: c.title })),
   },
   {
     title: "Agency",
     links: [
-      { href: "/#why", label: "Why Orchid" },
-      { href: "/meet-the-team-1", label: "Meet the team" },
-      { href: "/#partners", label: "Carrier partners" },
-      { href: "/contact", label: "Request a quote" },
+      { href: demo("#why"), label: "Why Orchid" },
+      { href: demo("/meet-the-team-1"), label: "Meet the team" },
+      { href: demo("#partners"), label: "Carrier partners" },
+      { href: demo("/contact"), label: "Request a quote" },
     ],
   },
   {
@@ -47,7 +47,8 @@ export function SiteFooter() {
           <nav key={col.title} aria-label={col.title} className="flex flex-col gap-3">
             <h2 className="label mb-1 text-gray-400">{col.title}</h2>
             {col.links.map((link) =>
-              link.href.startsWith("/") ? (
+              // Hash links stay plain anchors so the coverage explorer hears `hashchange`.
+              link.href.startsWith("/") && !link.href.includes("#") ? (
                 <Link key={link.label} href={link.href} className="w-fit text-[15px] text-paper hover:text-orchid-200">
                   {link.label}
                 </Link>

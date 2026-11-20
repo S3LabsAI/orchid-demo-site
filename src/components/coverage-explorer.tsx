@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { ArrowRight, Check, Minus, Plus } from "@phosphor-icons/react";
-import { coverage, type CoverageId } from "@/lib/site";
+import { coverage, demo, type CoverageId } from "@/lib/site";
 
 const ids = coverage.map((c) => c.id);
 const isLine = (v: string): v is CoverageId => (ids as string[]).includes(v);
@@ -27,7 +27,7 @@ export function CoverageExplorer() {
     setRequest((cur) => (cur.includes(id) ? cur.filter((x) => x !== id) : [...cur, id]));
 
   const titles = coverage.filter((c) => request.includes(c.id)).map((c) => c.title);
-  const quoteHref = `/contact?interest=${request.join(",")}`;
+  const quoteHref = `${demo("/contact")}?interest=${request.join(",")}`;
 
   return (
     <div className="flex flex-col">
